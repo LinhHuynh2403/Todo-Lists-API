@@ -1,0 +1,48 @@
+step 1: choosing a stack 
+- backend framework: FastAPI (or Flask)
+- database: postgreSQL
+- authentication: JWT (JSON web tokens)
+- ORM (Objecet-relational mapper): SWAlchemy
+- validation: Pydantic (for FastAPI)
+- security: password hashing with bcrypt
+- pagination and filtering: query parameters
+
+step 2: setting up the project
+1. create a virtual environment
+    python -m venv venv
+    source venv/bin/activate  # On Windows, use venv\Scripts\activate
+2. install Flask:
+    a. set up flask environment
+    b. database schema design
+        i. user table: 
+            - id
+            - name
+            - email (unique)
+            - password_hash
+        ii. to-do table
+            - id
+            - title 
+            - description
+            - user_id (foreign key)
+    c. user authentication
+        i. register a user 
+            - hash the password before storing it 
+            - ensure email unique
+            - return a JWT tokens
+        ii. login user
+            - validate email/password
+            - return JWT tokens
+    d. CRUD operation for to-do list
+        i. Each endpoint:
+            Requires authentication (JWT)
+            Ensures only the owner can modify their to-dos
+            Supports pagination & filtering
+    e. security and validation
+        JWT Authentication to protect endpoints
+        Bcrypt to hash passwords
+        Marshmallow for request validation
+        Ensure users can only access their own tasks
+    f. deployment and testing
+        Use Postman to test API
+        Write unit tests with pytest
+        Deploy using Docker or Render
